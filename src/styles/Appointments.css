@@ -1,0 +1,131 @@
+.appointments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1e1e1e;
+  color: #fff;
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: url(../assets/appointments_background3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-wrapper {
+  margin-bottom: 2rem;
+  background-color: #2a2a2a;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+}
+
+.react-calendar {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.react-calendar__tile--now {
+  background: #444 !important;
+}
+
+.highlight-day {
+  background-color: #00c897 !important;
+  color: #fff !important;
+}
+
+.form-wrapper {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 15px #000;
+}
+
+.appointment-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.appointment-form input,
+.appointment-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.book-btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.book-btn:hover {
+  background-color: #3c7dc0;
+}
+
+.no-times {
+  color: #ff6666;
+  font-style: italic;
+}
+
+.selected-date {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.react-calendar__tile {
+  color: black; /* Change this to white or a brighter color */
+  font-weight: 500;
+}
+
+/* The full top navigation bar (month/year and arrows) */
+.react-calendar__navigation {
+  background-color: #1e1e1e; /* Or any dark theme color */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* The individual nav buttons (previous/next/month/year) */
+.react-calendar__navigation button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for nav buttons */
+.react-calendar__navigation button:hover {
+  color: #4a90e2;
+}
+
+/* Disabled buttons (if trying to go before minDate, etc.) */
+.react-calendar__navigation button:disabled {
+  color: #555;
+  cursor: not-allowed;
+}

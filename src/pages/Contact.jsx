@@ -6,7 +6,6 @@ function Contact() {
 
   return (
     <>
-    <NavbarDark />
     <div className='app-main'>
       <div className='home'>
         <h2>This is the contact us page</h2>

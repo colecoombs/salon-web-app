@@ -5,14 +5,17 @@ import './styles/index.css'
 import App from './pages/App.jsx'
 import Appointments from './pages/Appointments.jsx'
 import Contact from './pages/Contact.jsx'
+import { Layout } from './components/Layout.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />} />
-        <Route path='/appointments' element={<Appointments />} />
-        <Route path='/contact' element={<Contact />} />
+        <Route element={<Layout />}>
+          <Route path='/' element={<App />} />
+          <Route path='/appointments' element={<Appointments />} />
+          <Route path='/contact' element={<Contact />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

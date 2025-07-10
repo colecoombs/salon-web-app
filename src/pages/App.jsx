@@ -6,7 +6,6 @@ function App() {
 
   return (
     <>
-    <NavbarDark />
     <div className='app-main'>
       <div className='home'>
         <h2>Welcome!</h2>
