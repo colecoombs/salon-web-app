@@ -28,7 +28,7 @@
 .react-calendar {
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: black;
 }
 
 .react-calendar__tile--now {

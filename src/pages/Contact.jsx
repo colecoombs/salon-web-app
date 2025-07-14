@@ -6,7 +6,7 @@ function Contact() {
 
   return (
     <>
-    <div className='app-main'>
+    <div className='contact-main'>
       <div className='home'>
         <h2>This is the contact us page</h2>
       </div>

@@ -1,0 +1,14 @@
+.contact-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  color: #fff;
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: url(../assets/appointments_background3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
