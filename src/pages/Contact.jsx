@@ -1,6 +1,5 @@
 import '../styles/Contact.css';
 import React from 'react';
-import { NavbarDark } from '../components/NavbarDark.jsx';
 
 function Contact() {
 
@@ -8,7 +7,12 @@ function Contact() {
     <>
     <div className='contact-main'>
       <div className='home'>
-        <h2>This is the contact us page</h2>
+        <h1>This is the contact us page</h1>
+      </div>
+      <div className='contact-info'>
+        <h2>Contact Information</h2>
+        <p>Email: info@salon.com</p>
+        <p>Phone: (123) 456-7890</p>
       </div>
     </div>
     </>
