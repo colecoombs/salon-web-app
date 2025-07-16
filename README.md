@@ -1,6 +1,6 @@
 # Salon App
 
-## This is a work in progress. 
+## This is a work in progress.
 
 This is a website I am developing for personal experience as well as business use for my wife.
 
@@ -11,6 +11,7 @@ It is built using React, JavaScript, CSS, Node.js, and PostgreSQL via Supabase. 
   - Shows a greeting
   - Shows past works in pictures
   - NavBar will be present on each page
+  - Currently waiting on pictures, placeholder images placed for now. Styling will be updated once pictures are received. 
     
 ## Appointments Page:
   - Shows a calendar with available dates and times to schedule appointments
@@ -43,6 +44,20 @@ It is built using React, JavaScript, CSS, Node.js, and PostgreSQL via Supabase. 
    ```
    http://localhost:5173
    ```
+
+## Screenshots
+
+![Home Page Screenshot](./src/assets/screenshot-home.png)
+
+![Appointments Page Screenshot](./src/assets/screenshot-appointments.png)
+
+![Contact Page Screenshot](./src/assets/screenshot-contact.png)
+
+## About
+
+## Contributors
+
+My brother is listed as a contributor on this project as I am also teaching him the basics of programming. 
 
 ---
 
