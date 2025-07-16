@@ -19,5 +19,5 @@ It is built using React, JavaScript, CSS, Node.js, and PostgreSQL via Supabase. 
     
 ## Contact Page:
   - A simple contact page that shows how to get in touch
-  - Ideally, add functionality such as a button that opens up the email app with the address already entered for ease of use.
+  - Ideally, add functionality such as a button that opens up the email app with the address already entered for ease of use. Simple features like this will be considered once the major steps are completed.
 
