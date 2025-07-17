@@ -73,7 +73,7 @@
 
 .modal-img {
   max-width: 90vw;
-  max-height: 90vw;
+  max-height: 90vh;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background: #fff;
