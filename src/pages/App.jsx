@@ -1,5 +1,5 @@
 import '../styles/App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import work1 from '../assets/past_works/work1.jpg'
 import work2 from '../assets/past_works/work2.jpg'
 import work3 from '../assets/past_works/work3.jpg'
@@ -16,6 +16,8 @@ import work12 from '../assets/past_works/work12.jpg'
 
 
 function App() {
+  const [modalImg, setModalImg] = useState(null);
+
   const pastWorks = [
     { img: work1, desc: "Classic bob cut" },
     { img: work2, desc: "Modern highlights" },
@@ -40,14 +42,23 @@ function App() {
       <div className='gallery'>
         {pastWorks.map((img, index) => (
           <div key={index} className="gallery-item">
-            <img src={img.img} alt={`Past work ${index + 1}`} />
+            <img src={img.img} 
+            alt={`Past work ${index + 1}`} 
+            onClick={() => setModalImg(img.img)}
+            style={{ cursor: 'pointer' }}
+            />
             <div className="gallery-desc">{img.desc}</div>
           </div>
         ))}
       </div>
     </div>
-    </>
-  )
+    {modalImg && (
+      <div className="modal" onClick={() => setModalImg(null)}>
+        <img src={modalImg} alt="Enlarged Picture" className='modal-img' />
+      </div>
+    )}
+  </>
+  );
 }
 
 export default App
