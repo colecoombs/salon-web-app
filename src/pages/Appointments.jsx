@@ -36,7 +36,7 @@ export default function Appointments() {
       }
     }
     fetchAppointments();
-  }, [selectedDate]);
+  }, [selectedDate, API_URL]);
 
   const handleBook = async (e) => {
     e.preventDefault();
