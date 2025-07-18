@@ -12,7 +12,7 @@ export default function Appointments() {
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
 
-  const API_URL = "http://localhost:5000/api/appointments";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Fetch all appointments for the selected date
@@ -36,7 +36,7 @@ export default function Appointments() {
       }
     }
     fetchAppointments();
-  }, [selectedDate]);
+  }, [selectedDate, API_URL]);
 
   const handleBook = async (e) => {
     e.preventDefault();
