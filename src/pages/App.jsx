@@ -17,18 +17,18 @@ import work12 from '../assets/past_works/work12.jpg'
 
 function App() {
   const pastWorks = [
-    { img: work1, desc: "Classic bob cut" },
-    { img: work2, desc: "Modern highlights" },
-    { img: work3, desc: "Elegant updo" },
-    { img: work4, desc: "Men's fade" },
-    { img: work5, desc: "Creative color" },
-    { img: work6, desc: "Bridal styling" },
-    { img: work7, desc: "Textured pixie" },
-    { img: work8, desc: "Long layers" },
-    { img: work9, desc: "Vintage curls" },
-    { img: work10, desc: "Asymmetrical cut" },
-    { img: work11, desc: "Beachy waves" },
-    { img: work12, desc: "Bold undercut" }
+    { img: work1, desc: "" },
+    { img: work2, desc: "" },
+    { img: work3, desc: "" },
+    { img: work4, desc: "" },
+    { img: work5, desc: "" },
+    { img: work6, desc: "" },
+    { img: work7, desc: "" },
+    { img: work8, desc: "" },
+    { img: work9, desc: "" },
+    { img: work10, desc: "" },
+    { img: work11, desc: "" },
+    { img: work12, desc: "" }
   ];
 
   return (
