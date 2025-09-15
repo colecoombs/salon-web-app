@@ -1,7 +1,17 @@
-import '../styles/Appointments.css';
 import React, { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import '../styles/Appointments.css';
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+function getAvailableTimes(date) {
+  // Hardcoded rules: weekdays 9am-5pm, weekends 10am-2pm
+  const weekdayTimes = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+  const weekendTimes = ["10:00", "11:00", "12:00", "13:00", "14:00"];
+  const day = date.getDay();
+  return (day === 0 || day === 6) ? weekendTimes : weekdayTimes;
+}
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
@@ -11,114 +21,91 @@ export default function Appointments() {
   const [client, setClient] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
-
-  const API_URL = import.meta.env.VITE_API_URL;
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    // Fetch all appointments for the selected date
     async function fetchAppointments() {
       try {
-        const response = await fetch(`${API_URL}?date=${selectedDate.toISOString().split('T')[0]}`);
-        if (!response.ok) throw new Error("Failed to fetch appointments");
+        const response = await fetch(`${API_URL}/appointments?date=${selectedDate.toISOString().split('T')[0]}`);
         const data = await response.json();
         setAppointments(data);
-
-        // Example: All possible times
-        const allTimes = [
-          "09:00", "10:00", "11:00", "12:00",
-          "13:00", "14:00", "15:00", "16:00"
-        ];
-        // Remove times that are already booked
+        // Filter out booked times
         const bookedTimes = data.map(appt => appt.time);
-        setAvailableTimes(allTimes.filter(time => !bookedTimes.includes(time)));
+        const openTimes = getAvailableTimes(selectedDate).filter(time => !bookedTimes.includes(time));
+        setAvailableTimes(openTimes);
       } catch (error) {
-        console.error("Error fetching appointments:", error.message);
+        setAvailableTimes(getAvailableTimes(selectedDate));
       }
     }
     fetchAppointments();
-  }, [selectedDate, API_URL]);
+  }, [selectedDate]);
 
   const handleBook = async (e) => {
     e.preventDefault();
+    setMessage("");
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/appointments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          client,
-          phone,
-          service,
-          date: selectedDate.toISOString().split('T')[0],
-          time: selectedTime
-        }),
+        body: JSON.stringify({ client, phone, service, date: selectedDate.toISOString().split('T')[0], time: selectedTime }),
       });
-      if (!response.ok) throw new Error("Failed to add appointment");
-      setClient("");
-      setPhone("");
-      setService("");
-      setSelectedTime("");
-      // Refresh available times
-      const data = await response.json();
-      setAppointments([...appointments, data]);
-    } catch (error) {
-      console.error("Error adding appointment:", error.message);
+      if (response.ok) {
+        setMessage("Appointment requested! You'll be notified if accepted.");
+        setClient(""); setPhone(""); setService(""); setSelectedTime("");
+      } else {
+        setMessage("Could not request appointment. Please try another time.");
+      }
+    } catch {
+      setMessage("Error connecting to server.");
     }
   };
 
-return (
-  <div className="appointments-container">
-    <h1 className="page-title">Book an Appointment</h1>
-
-    <div className="calendar-wrapper">
+  return (
+    <div className="appointments-container">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Book an Appointment</h2>
       <Calendar
         onChange={setSelectedDate}
         value={selectedDate}
         tileDisabled={({ date }) => date < new Date()}
-        tileClassName={({ date }) => {
-          if (appointments.find(appt => appt.date === date.toISOString().split('T')[0])) {
-            return 'highlight-day';
-          }
-          return null;
-        }}
       />
+      <div className="selected-date">
+        {selectedDate.toDateString()}
+      </div>
+      <form className="appointment-form" onSubmit={handleBook}>
+        <select
+          value={selectedTime}
+          onChange={e => setSelectedTime(e.target.value)}
+          required
+        >
+          <option value="">Select a time</option>
+          {availableTimes.map(time => (
+            <option key={time} value={time}>{time}</option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="Client Name"
+          value={client}
+          onChange={e => setClient(e.target.value)}
+          required
+        />
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Service (e.g. Haircut, Color)"
+          value={service}
+          onChange={e => setService(e.target.value)}
+          required
+        />
+        <button type="submit">Book Appointment</button>
+      </form>
+      {message && <div style={{ color: '#fff', marginTop: '1rem' }}>{message}</div>}
     </div>
-
-    <div className="form-wrapper">
-      <h3 className="selected-date">{selectedDate.toDateString()}</h3>
-      {availableTimes.length === 0 ? (
-        <p className="no-times">No available times for this day.</p>
-      ) : (
-        <form onSubmit={handleBook} className="appointment-form">
-          <label>
-            Time:
-            <select value={selectedTime} onChange={e => setSelectedTime(e.target.value)} required>
-              <option value="">Select a time</option>
-              {availableTimes.map(time => (
-                <option key={time} value={time}>{time}</option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            Name:
-            <input type="text" placeholder="Client Name" value={client} onChange={e => setClient(e.target.value)} required />
-          </label>
-
-          <label>
-            Phone:
-            <input type="tel" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)} required />
-          </label>
-
-          <label>
-            Service:
-            <input type="text" placeholder="Service (e.g. Haircut, Color)" value={service} onChange={e => setService(e.target.value)} required />
-          </label>
-
-          <button type="submit" className="book-btn">Book Appointment</button>
-        </form>
-      )}
-    </div>
-  </div>
-);
-
+  );
 }

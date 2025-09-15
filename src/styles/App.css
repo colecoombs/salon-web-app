@@ -11,15 +11,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* height: 100vh; */
   flex-direction: column;
   background-color: #1e1e1e;
   color: #fff;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1rem; /* Reduced padding for wider gallery */
   background-image: url(../assets/appointments_background3.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; /* Less zoomed-in background */
   background-position: center;
 }
 
@@ -28,55 +27,76 @@
   color: black;
 }
 
+/* Gallery grid and modal styles */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 20px;
-  background-color: black;
-  border-radius: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
 }
 
-.gallery img {
+.gallery-wrapper {
   width: 100%;
-  height: 12vw;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .gallery-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 16px;
+  padding: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.gallery-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
 }
 
 .gallery-desc {
-  margin-top: 0.5rem;
   color: #fff;
   font-size: 1rem;
   text-align: center;
+  margin-top: 0.5rem;
 }
 
-.modal {
+/* Modal overlay styles */
+.modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-.modal-img {
+.modal-content {
+  background: #222;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   max-width: 90vw;
   max-height: 90vh;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-img {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 12px;
 }
 
 @keyframes logo-spin {
@@ -100,4 +120,15 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .modal-content {
+    padding: 1rem;
+  }
 }

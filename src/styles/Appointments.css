@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   background-color: #1e1e1e;
   color: black;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 2rem 1rem;
   background-image: url(../assets/appointments_background3.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -49,6 +50,18 @@
   box-shadow: 0 0 15px #000;
 }
 
+.appointment-form {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .appointment-form label {
   display: block;
   margin-bottom: 1rem;
@@ -61,8 +74,25 @@
   padding: 0.5rem;
   margin-top: 0.3rem;
   border-radius: 5px;
-  border: none;
+  border: 1px solid #444;
+  background: #222;
+  color: #fff;
   font-size: 1rem;
+}
+
+.appointment-form button {
+  background: #646cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.appointment-form button:hover {
+  background: #535bf2;
 }
 
 .book-btn {
@@ -90,12 +120,8 @@
 .selected-date {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: white;
-}
-
-.react-calendar__tile {
-  color: black; /* Change this to white or a brighter color */
-  font-weight: 500;
+  color: #fff;
+  text-align: center;
 }
 
 /* The full top navigation bar (month/year and arrows) */
@@ -129,4 +155,31 @@
 .react-calendar__navigation button:disabled {
   color: #555;
   cursor: not-allowed;
+}
+
+/* Contact page: centered content and background */
+.contact-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url(../assets/appointments_background3.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
 }

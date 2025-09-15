@@ -35,29 +35,36 @@ function App() {
 
   return (
     <>
-    <div className='app-main'>
-      <div className='home'>
-        <h1>Welcome to Hairway to Heaven!</h1>
-      </div>
-      <div className='gallery'>
-        {pastWorks.map((img, index) => (
-          <div key={index} className="gallery-item">
-            <img src={img.img} 
-            alt={`Past work ${index + 1}`} 
-            onClick={() => setModalImg(img.img)}
-            style={{ cursor: 'pointer' }}
-            />
-            <div className="gallery-desc">{img.desc}</div>
+      <div className='app-main'>
+        <div className='home'>
+          <h1>Welcome to Hairway to Heaven!</h1>
+          <h2>Take a look at some of my past work!</h2>
+        </div>
+        <div className='gallery-wrapper'>
+          <div className='gallery'>
+            {pastWorks.map((img, index) => (
+              <div key={index} className="gallery-item">
+                <img
+                  src={img.img}
+                  alt={`Past work ${index + 1}`}
+                  onClick={() => setModalImg(img.img)}
+                  style={{ cursor: 'pointer', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}
+                  className="gallery-img"
+                />
+                <div className="gallery-desc">{img.desc}</div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </div>
-    {modalImg && (
-      <div className="modal" onClick={() => setModalImg(null)}>
-        <img src={modalImg} alt="Enlarged Picture" className='modal-img' />
-      </div>
-    )}
-  </>
+      {modalImg && (
+        <div className="modal-overlay" onClick={() => setModalImg(null)}>
+          <div className="modal-content">
+            <img src={modalImg} alt="Enlarged Picture" className='modal-img' />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
