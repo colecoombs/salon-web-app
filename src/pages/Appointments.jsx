@@ -6,11 +6,26 @@ import '../styles/Appointments.css';
 const API_URL = import.meta.env.VITE_API_URL;
 
 function getAvailableTimes(date) {
-  // Hardcoded rules: weekdays 9am-5pm, weekends 10am-2pm
-  const weekdayTimes = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
-  const weekendTimes = ["10:00", "11:00", "12:00", "13:00", "14:00"];
+  // Set your time frames
+  const weekdayStart = 9, weekdayEnd = 17; // 9am to 5pm
+  const weekendStart = 10, weekendEnd = 14; // 10am to 2pm
   const day = date.getDay();
-  return (day === 0 || day === 6) ? weekendTimes : weekdayTimes;
+  const start = (day === 0 || day === 6) ? weekendStart : weekdayStart;
+  const end = (day === 0 || day === 6) ? weekendEnd : weekdayEnd;
+  const times = [];
+  for (let h = start; h <= end; h++) {
+    times.push(`${h.toString().padStart(2, '0')}:00`);
+    if (h !== end) times.push(`${h.toString().padStart(2, '0')}:30`);
+  }
+  return times;
+}
+
+function formatTime12h(time) {
+  // time is "HH:MM"
+  let [hour, minute] = time.split(':').map(Number);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12 || 12;
+  return `${hour}:${minute.toString().padStart(2, '0')} ${ampm}`;
 }
 
 export default function Appointments() {
@@ -29,9 +44,19 @@ export default function Appointments() {
         const response = await fetch(`${API_URL}/appointments/date/${selectedDate.toISOString().split('T')[0]}`);
         const data = await response.json();
         setAppointments(data);
-        // Filter out booked times
-        const bookedTimes = data.map(appt => appt.time.slice(0, 5)); // Get HH:MM from HH:MM:SS
-        const openTimes = getAvailableTimes(selectedDate).filter(time => !bookedTimes.includes(time));
+
+        // Block out 2.5 hours after each booked time
+        const allTimes = getAvailableTimes(selectedDate);
+        let blocked = new Set();
+        data.forEach(appt => {
+          // Get index of booked time
+          const bookedIdx = allTimes.findIndex(t => t === appt.time.slice(0,5));
+          // Block this and next 4 slots (2.5 hours = 5 half-hours)
+          for (let i = bookedIdx; i < bookedIdx + 5; i++) {
+            if (allTimes[i]) blocked.add(allTimes[i]);
+          }
+        });
+        const openTimes = allTimes.filter(time => !blocked.has(time));
         setAvailableTimes(openTimes);
       } catch (error) {
         setAvailableTimes(getAvailableTimes(selectedDate));
@@ -79,7 +104,7 @@ export default function Appointments() {
         >
           <option value="">Select a time</option>
           {availableTimes.map(time => (
-            <option key={time} value={time}>{time}</option>
+            <option key={time} value={time}>{formatTime12h(time)}</option>
           ))}
         </select>
         <input
