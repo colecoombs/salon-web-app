@@ -6,7 +6,7 @@ function NavbarDark() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 shadow-md">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white px-6 py-4 shadow-md">
       <div className="flex items-center justify-between">
         <div><Link to="/" className="text-xl text-[#646cff] font-bold">Hairway to Heaven</Link></div>
 

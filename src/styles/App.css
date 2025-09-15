@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ===== Layout root ===== */
+:root {
+  /* Adjust if your navbar is taller/shorter */
+  --nav-h: 64px;
+}
+
 #root {
   max-width: auto;
   margin: 0;
@@ -15,19 +21,23 @@
   background-color: #1e1e1e;
   color: #fff;
   min-height: 100vh;
-  padding: 1rem; /* Reduced padding for wider gallery */
+  padding: 1rem;
+  /* Ensure content starts below the fixed navbar */
+  padding-top: 64px;
+
   background-image: url(../assets/appointments_background3.png);
   background-repeat: no-repeat;
-  background-size: cover; /* Less zoomed-in background */
+  background-size: cover;
   background-position: center;
 }
 
+/* Desktop/large-screen positioning for the hero text */
 .app-main > .home {
-  transform: translateY(-40%);
+  margin-top: 2rem;;
   color: black;
 }
 
-/* Gallery grid and modal styles */
+/* ===== Gallery ===== */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -70,7 +80,7 @@
   margin-top: 0.5rem;
 }
 
-/* Modal overlay styles */
+/* ===== Modal ===== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -99,13 +109,10 @@
   border-radius: 12px;
 }
 
+/* ===== Utilities ===== */
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -114,20 +121,45 @@
   }
 }
 
-.card {
-  padding: 2em;
+.card { padding: 2em; }
+.read-the-docs { color: #888; }
+
+/* ===== Responsive tweaks ===== */
+
+/* Tablet: ease up the upward shift */
+@media (max-width: 1024px) {
+  .app-main > .home {
+    transform: none;
+  }
 }
 
-.read-the-docs {
-  color: #888;
-}
+/* Mobile: cancel the upward shift and resize headings */
+@media (max-width: 768px) {
+  :root { --nav-h: 72px; }           /* tweak if your mobile navbar is taller */
+  .app-main { padding-top: var(--nav-h); }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
+  .app-main > .home {
+    margin-top: 4rem;               /* small breathing room */
+    text-align: center;
+  }
+
+  .app-main > .home h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 0.25rem 0;
+  }
+
+  .app-main > .home h2 {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin: 0.25rem 0;
+  }
+
   .gallery {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .modal-content {
     padding: 1rem;
   }
