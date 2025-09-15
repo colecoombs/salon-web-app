@@ -6,6 +6,7 @@ import App from './pages/App.jsx'
 import Appointments from './pages/Appointments.jsx'
 import Contact from './pages/Contact.jsx'
 import { Layout } from './components/Layout.jsx'
+import Admin from './pages/Admin.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/' element={<App />} />
           <Route path='/appointments' element={<Appointments />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='admin' element={<Admin />} />
         </Route>
       </Routes>
     </BrowserRouter>

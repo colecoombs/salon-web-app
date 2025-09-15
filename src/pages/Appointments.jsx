@@ -26,11 +26,11 @@ export default function Appointments() {
   useEffect(() => {
     async function fetchAppointments() {
       try {
-        const response = await fetch(`${API_URL}/appointments?date=${selectedDate.toISOString().split('T')[0]}`);
+        const response = await fetch(`${API_URL}/appointments/date/${selectedDate.toISOString().split('T')[0]}`);
         const data = await response.json();
         setAppointments(data);
         // Filter out booked times
-        const bookedTimes = data.map(appt => appt.time);
+        const bookedTimes = data.map(appt => appt.time.slice(0, 5)); // Get HH:MM from HH:MM:SS
         const openTimes = getAvailableTimes(selectedDate).filter(time => !bookedTimes.includes(time));
         setAvailableTimes(openTimes);
       } catch (error) {
