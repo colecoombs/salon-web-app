@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ===== Layout root ===== */
 :root {
@@ -35,7 +33,7 @@
 
 /* Desktop/large-screen positioning for the hero text */
 .app-main > .home {
-  margin-top: 2rem;;
+  margin-top: 2rem;
   color: black;
 }
 
