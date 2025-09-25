@@ -44,7 +44,7 @@ export default function HairwayToHeaven() {
       <section className="relative">
         <div className="absolute inset-0 -z-10">
           <img
-            src="/src/assets/appointments_background3.png"
+            src="/appointments_background3.png"
             alt="Salon hero"
             className="h-[70vh] w-full object-cover"
           />
@@ -113,19 +113,19 @@ export default function HairwayToHeaven() {
                 title: "Cut & Style",
                 desc: "Custom cut, wash, and blowout designed for your face shape and lifestyle.",
                 price: "$45+",
-                img: "/src/assets/past_works/work1.jpg",
+                img: "/past_works/work1.jpg",
               },
               {
                 title: "Color & Balayage",
                 desc: "Dimension, shine, and low‑maintenance color tailored to your tone.",
                 price: "$120+",
-                img: "/src/assets/past_works/work2.jpg",
+                img: "/past_works/work2.jpg",
               },
               {
                 title: "Bridal & Event",
                 desc: "On‑site or in‑studio styling for weddings, photos, and special events.",
                 price: "Custom",
-                img: "/src/assets/past_works/work3.jpg",
+                img: "/past_works/work3.jpg",
               },
             ].map((s, i) => (
               <Card key={i} className="overflow-hidden rounded-2xl">
@@ -156,7 +156,7 @@ export default function HairwayToHeaven() {
             <Card className="rounded-2xl overflow-hidden">
               <div className="aspect-[16/9] w-full overflow-hidden">
                 <img 
-                  src="/src/assets/stylist.jpg" 
+                  src="/stylist.jpg" 
                   alt="Kaitlin Coombs" 
                   className="h-full w-full object-cover object-top"
                 />
@@ -188,10 +188,10 @@ export default function HairwayToHeaven() {
               <div 
                 key={n} 
                 className="aspect-square overflow-hidden rounded-2xl cursor-pointer group relative"
-                onClick={() => setSelectedImage(`/src/assets/past_works/work${n}.jpg`)}
+                onClick={() => setSelectedImage(`/past_works/work${n}.jpg`)}
               >
                 <img 
-                  src={`/src/assets/past_works/work${n}.jpg`} 
+                  src={`/past_works/work${n}.jpg`} 
                   alt="Gallery" 
                   className="h-full w-full object-cover object-center transform transition duration-300 group-hover:scale-110"
                   loading="lazy"
@@ -232,7 +232,7 @@ export default function HairwayToHeaven() {
             <CardContent className="p-6 md:p-10 grid md:grid-cols-2 gap-6 items-center">
               <div>
                 <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">Ready for great hair?</h3>
-                <p className="mt-2 text-gray-600">Choose your service, stylist, and time — all online. We’ll send text + email confirmations.</p>
+                <p className="mt-2 text-gray-600">Choose your service and time — all online. We’ll send text + email confirmations.</p>
                 <div className="mt-5 flex gap-3">
                   <Button size="lg" className="rounded-2xl" asChild>
                     <a href="/appointments">Book Online</a>
