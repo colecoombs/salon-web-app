@@ -195,7 +195,7 @@ export default function HairwayToHeaven() {
                 <img 
                   src={`/past_works/work${n}.jpg`} 
                   alt="Gallery" 
-                  className="h-full w-full object-cover object-center transform transition duration-300 group-hover:scale-110"
+                  className="h-full w-full object-cover object-center transform transition duration-300 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
