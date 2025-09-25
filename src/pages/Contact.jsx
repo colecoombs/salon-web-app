@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
@@ -10,6 +10,49 @@ const Container = ({ children }) => (
 );
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Sending message...' });
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      setStatus({ type: 'success', message: data.message || 'Message sent successfully!' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setStatus({ 
+        type: 'error', 
+        message: error.message || 'Failed to send message. Please try again or contact us directly.' 
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Top bar */}
@@ -118,13 +161,25 @@ function Contact() {
                   <CardTitle>Send us a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-4">
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    {status.message && (
+                      <div className={`p-4 rounded-lg ${
+                        status.type === 'success' ? 'bg-green-100 text-green-700' :
+                        status.type === 'error' ? 'bg-red-100 text-red-700' :
+                        'bg-blue-100 text-blue-700'
+                      }`}>
+                        {status.message}
+                      </div>
+                    )}
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-2 block">
                         Your Name
                       </label>
                       <Input
                         type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="Enter your name"
                         required
                       />
@@ -135,6 +190,9 @@ function Contact() {
                       </label>
                       <Input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="Enter your email"
                         required
                       />
@@ -145,6 +203,9 @@ function Contact() {
                       </label>
                       <Input
                         type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         placeholder="(555) 123-4567"
                       />
                     </div>
@@ -153,14 +214,22 @@ function Contact() {
                         Message
                       </label>
                       <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black min-h-[120px] resize-vertical"
                         placeholder="Tell us about your hair goals or ask any questions..."
                         required
                       />
                     </div>
-                    <Button type="submit" size="lg" className="w-full rounded-2xl">
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full rounded-2xl"
+                      disabled={status.type === 'loading'}
+                    >
                       <Mail className="mr-2 h-4 w-4"/>
-                      Send Message
+                      {status.type === 'loading' ? 'Sending...' : 'Send Message'}
                     </Button>
                   </form>
                 </CardContent>
