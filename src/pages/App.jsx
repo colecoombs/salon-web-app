@@ -29,7 +29,7 @@ export default function HairwayToHeaven() {
               <a href="#artists" className="hover:text-black/70">Stylists</a>
               <a href="#gallery" className="hover:text-black/70">Gallery</a>
               <a href="#testimonials" className="hover:text-black/70">Reviews</a>
-              <a href="#contact" className="hover:text-black/70">Contact</a>
+              <a href="/contact" className="hover:text-black/70">Contact</a>
             </nav>
             <div className="flex items-center gap-3">
               <Button className="rounded-2xl" asChild>
