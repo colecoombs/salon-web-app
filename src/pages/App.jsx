@@ -33,7 +33,9 @@ export default function HairwayToHeaven() {
             </nav>
             <div className="flex items-center gap-3">
               <Button className="rounded-2xl" asChild>
-                <a href="/appointments"><Calendar className="mr-2 h-4 w-4"/>Book Now</a>
+                <a href="/appointments" className="inline-flex items-center">
+                  <Calendar className="mr-2 h-4 w-4"/>Book Now
+                </a>
               </Button>
             </div>
           </div>
