@@ -87,7 +87,7 @@ export default function HairwayToHeaven() {
           {[
             {icon: <Sparkles className="h-4 w-4"/>, label: "Balayage"},
             {icon: <Scissors className="h-4 w-4"/>, label: "Precision Cuts"},
-            {icon: <Gem className="h-4 w-4"/>, label: "Bridal"},
+            {icon: <Gem className="h-4 w-4"/>, label: "Men's Cuts"},
             {icon: <Star className="h-4 w-4"/>, label: "5★ Rated"},
             {icon: <Calendar className="h-4 w-4"/>, label: "Online Booking"},
             {icon: <Sparkles className="h-4 w-4"/>, label: "Color Experts"},
@@ -115,7 +115,7 @@ export default function HairwayToHeaven() {
                 title: "Cut & Style",
                 desc: "Custom cut, wash, and blowout designed for your face shape and lifestyle.",
                 price: "$45+",
-                img: "/past_works/work1.jpg",
+                img: "/past_works/work3.jpg",
               },
               {
                 title: "Color & Balayage",
@@ -124,10 +124,10 @@ export default function HairwayToHeaven() {
                 img: "/past_works/work2.jpg",
               },
               {
-                title: "Bridal & Event",
+                title: "Men's Cuts",
                 desc: "On‑site or in‑studio styling for weddings, photos, and special events.",
                 price: "Custom",
-                img: "/past_works/work3.jpg",
+                img: "/past_works/work1.jpg",
               },
             ].map((s, i) => (
               <Card key={i} className="overflow-hidden rounded-2xl">
